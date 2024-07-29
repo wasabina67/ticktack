@@ -12,7 +12,9 @@ PULL = docker pull $(IMAGE_NAME):$(IMAGE_TAG)
 build:
 	$(BUILD)
 run:
-	$(RUN)
+	-$(RUN); \
+	STATUS=$$?; \
+	if [ $$STATUS -ne 130 ]; then exit $$STATUS; fi
 login:
 	$(LOGIN)
 push:
